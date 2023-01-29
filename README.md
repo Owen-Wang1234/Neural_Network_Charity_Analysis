@@ -25,3 +25,12 @@ When the data is imported into a DataFrame, the first glance shows that the ID a
 After the binning process, the columns with categorical types are listed to be used in the fitting and transformation of the applicant DataFrame under the `OneHotEncoder` method. The results are merged into the applicant DataFrame while dropping the original categorical columns.
 
 Whether the applicant is successful or not is the target parameter, so all the other columns are features, and the `X` and `y` arrays are established accordingly. These arrays are divided into training and testing sets using the random state of one. The features (training and testing) are standardized using the `StandardScaler` fitted with the training data.
+
+## First Attempt with TensorFlow Neural Network
+After the training and testing data sets are prepared, a neural network is created to set up a binary classification model. The first one tested is a deep neural network with two hidden layers. The number of input features is quickly calculated by extracting the first row of the training X matrix and getting the length. The first hidden layer takes the input features and runs eighty nodes; the features matrix holds 43 columns, so a general convention is to use about twice to three times as many nodes. The first hidden layer designates the Rectified Linear Unit (ReLU) function as the activation function. The second hidden layer runs thirty nodes and also designates the ReLU function as the activation function. The last layer is the output layer with one single node and uses the Sigmoid function as the activation function.
+
+This neural network is compiled using the binary cross-entropy loss, the ADAM algorithm optimizer, and accuracy as an evaluated metric. A quick run fitting the model with the training data over fifty epochs shows that each epoch runs 804 batches. This is used to calibrate the checkpoint system that sets up a callback which will store checkpoints into a separate folder. For the case of economy, only the weights of the model will be saved, and only every five epochs (which will require knowledge of the batch size to calibrate properly).
+
+The trained model is then evaluated against the testing data with the loss and accuracy observed. The results for the final model and some arbitrary checkpoint are displayed below:
+
+![Results of the First Neural Network](https://www.github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/First_Neural_Network_Results.png)
