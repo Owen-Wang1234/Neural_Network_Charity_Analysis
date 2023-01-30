@@ -37,3 +37,17 @@ The trained model is then evaluated against the testing data with the loss and a
 
 ## Optimization of the Neural Network
 As seen in the figure above, the model is not the best it could be; the accuracy is **less than 75%** and the loss is **approximately 0.56** which are not ideal values. The next step is to seek ways to improve the performance of the neural network.
+
+### Attempt 1: Adjust the Pre-Processing
+One attempt to improve the performance involves adjusting the pre-processing:
+
+- The primary target for the model is whether or not a charity succeeds with investor support (`IS_SUCCESSFUL`).
+- The features removed from the DataFrame are considered non-factors. In addition to the `EIN` and `NAME` features, the `STATUS` and `SPECIAL_CONSIDERATIONS` features are also removed.
+- The remaining features will be used in the model: `APPLICATION_TYPE`, `AFFILIATION`, `CLASSIFICATION`, `USE_CASE`, `ORGANIZATION`, `INCOME_AMT`, `ASK_AMT`, and `IS_SUCCESSFUL`
+
+One change in the binning process adds one more `APPLICATION_TYPE` category into the "Other" bin.
+
+The results from this attempt is illustrated below:
+![Results of the First Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Attempt1_Results.png)
+
+The accuracy is still not at least 75%, but the adjustments to the pre-processing has yielded some improvement.
