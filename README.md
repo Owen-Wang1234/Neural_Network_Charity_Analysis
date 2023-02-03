@@ -53,7 +53,7 @@ The next attempt to improve the performance focuses on the neural network. One i
 ![Second Neural Network Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/NeuralNet2.png)
 
 The results from this attempt is illustrated here:
-![Results of the Second Attempt](https://github.com/Owen-Wang1234/Nerual_Network_Charity_Analysis/blob/main/Images/Attempt2_Results.png)
+![Results of the Second Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/Attempt2_Results.png)
 
 The accuracy remains below 75%, and in fact has not changed from the previous attempt.
 
