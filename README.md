@@ -33,21 +33,59 @@ This neural network is compiled using the binary cross-entropy loss, the ADAM al
 
 The trained model is then evaluated against the testing data with the loss and accuracy observed. The results for the final model and some arbitrary checkpoint are displayed below:
 
-![Results of the First Neural Network](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/First_Neural_Network_Results.png)
+![Results of the First Neural Network](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/First_Neural_Network_Results.png)
 
 ## Optimization of the Neural Network
 As seen in the figure above, the model is not the best it could be; the accuracy is **less than 75%** and the loss is **approximately 0.56** which are not ideal values. The next step is to seek ways to improve the performance of the neural network.
 
 ### Attempt 1: Adjust the Pre-Processing
-One attempt to improve the performance involves adjusting the pre-processing:
+One attempt to improve the performance involves adjusting the pre-processing. An examination of the features reveals that the `STATUS` and `SPECIAL_CONSIDERATIONS` features are very unbalanced in value distribution, and the minority classes did not appear to yield a significant impact. Thus, these two were also removed at the beginning.
+
+The binning process was readjusted to allow more bins in the `APPLICATION_TYPE` and `CLASSIFICATION` features. Because this attempt focuses on the pre-processing, the neural network remains untouched.
+
+The results from this attempt is illustrated below:
+![Results of the First Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/Attempt1_Results.png)
+
+The accuracy is still not at 75%, but the adjustments to the pre-processing has yielded some improvement.
+
+### Attempt 2: Improve the Neural Network
+The next attempt to improve the performance focuses on the neural network. One idea is to add more neurons to each layer and to try one more layer. The result is shown below:
+![Second Neural Network Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/NeuralNet2)
+
+The results from this attempt is illustrated here:
+![Results of the Second Attempt](https://github.com/Owen-Wang1234/Nerual_Network_Charity_Analysis/blob/main/Images/Attempt2_Results.png)
+
+The accuracy remains below 75%, and in fact has not changed from the previous attempt.
+
+### Attempt 3: Adjust the Activation Functions
+The last attempt involves the activation functions of the neural network. The layers that used the Rectified Linear Unit (ReLU) function changed over to the Hypberbolic Tangent (Tanh) function; the output layer stays on the Sigmoid function. The neural network is now:
+![Third Neural Network Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/NeuralNet3)
+
+The results from this attempt is illustrated here:
+![Results of the Third Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/Attempt3_Results.png)
+
+The accuracy still remains unchanged, and not at 75%.
+
+### Special Note
+During the attempts to optimize the neural network, it was noticed that even if the training and testing data sets stay unchanged, each compilation of the same neural network model yielded slightly different results. Each attempt with the same data and the same model resulted in varying accuracy percentages. This is attributed to the fact that the neural network cannot be fixed to one random state.
+
+## Results
+After three attempts, the neural network model still could not achieve the accuracy rating of 75%. Over these attempts:
 
 - The primary target for the model is whether or not a charity succeeds with investor support (`IS_SUCCESSFUL`).
 - The features removed from the DataFrame are considered non-factors. In addition to the `EIN` and `NAME` features, the `STATUS` and `SPECIAL_CONSIDERATIONS` features are also removed.
-- The remaining features will be used in the model: `APPLICATION_TYPE`, `AFFILIATION`, `CLASSIFICATION`, `USE_CASE`, `ORGANIZATION`, `INCOME_AMT`, `ASK_AMT`, and `IS_SUCCESSFUL`
+- The remaining features will be used in the model: `APPLICATION_TYPE`, `AFFILIATION`, `CLASSIFICATION`, `USE_CASE`, `ORGANIZATION`, `INCOME_AMT`, `ASK_AMT`, and `IS_SUCCESSFUL`.
 
-One change in the binning process adds one more `APPLICATION_TYPE` category into the "Other" bin.
+- The neural network model at the end contains four layers:
+    1. The input layer contains 180 neurons, which is three times the number of input features.
+    2. The next hidden layer contains 40 neurons, slightly more than the previous 30 but the calculated parameters do not exceed the number of parameters in the previous layer.
+    3. The next hidden layer contains 30 neurons, slightly less than the number of neurons in the prior layer.
+    4. The last layer is the output layer with only one neuron.
+The non-output layers all used the Tanh activation function in place of the ReLU function since the ReLU function outputs zero for any negative input value, running the risk of "dying neurons" when many data points fall locked into zero.
 
-The results from this attempt is illustrated below:
-![Results of the First Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Attempt1_Results.png)
-
-The accuracy is still not at least 75%, but the adjustments to the pre-processing has yielded some improvement.
+- Despite three attempts, the neural network model cannot reach the accuracy of 75%. It always stagnated or fluctuated around the 73% mark.
+- Attempts to improve the neural network model include:
+    1. Adjusting the pre-processing to remove some features perceived as non-factors and allowing more bins to separate any data points that could have been confounding
+    2. Expanding the neural network with more neurons and an extra hidden layer
+    3. Trying different activation functions
+    4. Attempts to increase the number of epochs yielded nothing productive as the accuracy plateaued somewhat quickly during training.
