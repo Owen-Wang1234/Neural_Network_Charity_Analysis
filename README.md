@@ -50,7 +50,7 @@ The accuracy is still not at 75%, but the adjustments to the pre-processing has 
 
 ### Attempt 2: Improve the Neural Network
 The next attempt to improve the performance focuses on the neural network. One idea is to add more neurons to each layer and to try one more layer. The result is shown below:
-![Second Neural Network Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/NeuralNet2)
+![Second Neural Network Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/NeuralNet2.png)
 
 The results from this attempt is illustrated here:
 ![Results of the Second Attempt](https://github.com/Owen-Wang1234/Nerual_Network_Charity_Analysis/blob/main/Images/Attempt2_Results.png)
@@ -59,7 +59,7 @@ The accuracy remains below 75%, and in fact has not changed from the previous at
 
 ### Attempt 3: Adjust the Activation Functions
 The last attempt involves the activation functions of the neural network. The layers that used the Rectified Linear Unit (ReLU) function changed over to the Hypberbolic Tangent (Tanh) function; the output layer stays on the Sigmoid function. The neural network is now:
-![Third Neural Network Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/NeuralNet3)
+![Third Neural Network Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/NeuralNet3.png)
 
 The results from this attempt is illustrated here:
 ![Results of the Third Attempt](https://github.com/Owen-Wang1234/Neural_Network_Charity_Analysis/blob/main/Images/Attempt3_Results.png)
@@ -81,7 +81,7 @@ After three attempts, the neural network model still could not achieve the accur
     2. The next hidden layer contains 40 neurons, slightly more than the previous 30 but the calculated parameters do not exceed the number of parameters in the previous layer.
     3. The next hidden layer contains 30 neurons, slightly less than the number of neurons in the prior layer.
     4. The last layer is the output layer with only one neuron.
-The non-output layers all used the Tanh activation function in place of the ReLU function since the ReLU function outputs zero for any negative input value, running the risk of "dying neurons" when many data points fall locked into zero.
+    - The non-output layers all used the Tanh activation function in place of the ReLU function since the ReLU function outputs zero for any negative input value, running the risk of "dying neurons" when many data points fall locked into zero.
 
 - Despite three attempts, the neural network model cannot reach the accuracy of 75%. It always stagnated or fluctuated around the 73% mark.
 - Attempts to improve the neural network model include:
@@ -89,3 +89,10 @@ The non-output layers all used the Tanh activation function in place of the ReLU
     2. Expanding the neural network with more neurons and an extra hidden layer
     3. Trying different activation functions
     4. Attempts to increase the number of epochs yielded nothing productive as the accuracy plateaued somewhat quickly during training.
+
+## Summary
+The neural network model can provide a fairly okay performance with an accuracy between 72% and 73%, but none of the attempts at improvement described above have been able to improve the accuracy to at least 75%. This brings up the possibility of looking into other models that could serve as alternatives.
+
+The neural network model, regardless of the number of layers and neurons, eventually ends with an output layer which contains only one neuron and runs the Sigmoid activation function. This output layer effectively serves as a logistic regression model, which is essentially based on the sigmoid curve. At this point, it may be worth looking into a logistic regression model, especially since the data has a relatively balanced distribution of outcomes (success vs. failure).
+
+If the same pre-processing is used, then the logistic regression model can deliver at least comparable results that will be easier to follow and understand. A Random Forest Classifier model would be a solid candidate that can handle the large number of data points and various features reasonably well.
